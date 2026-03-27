@@ -1,0 +1,26 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "mhq-backend/server.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "mhq-frontend/package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "mhq-frontend/build"
+      }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "/mhq-backend/server.js"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/mhq-frontend/build/$1"
+    }
+  ]
+}
